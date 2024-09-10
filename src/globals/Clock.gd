@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
     if delta >= 3 and DangerZone:
         print("[CLOCK / WARN]: Game exceeded 3 seconds of delta time and we attempted to catch up to tick rate last frame! Returning to title screen...")
         # TODO: Player should return to title screen here. For now, we'll just close the game. Since games aren't being saved right now, I'll change this later.
-        get_tree().quit(GlobalEnums.ErrorCodes.PREFORMANCE_FAILSAFE)
+        get_tree().quit(GlobalEnums.ERRORCODES.PREFORMANCE_FAILSAFE)
         return
     if CurrentTime >= TickTime + (TickInterval*3):
         print("[CLOCK / WARN]: Last tick took %fs, is the game being slowed down? (Ticks should typically take %fs - %fs for this game...)" % [delta, TickInterval*.8, TickInterval*1.2])
