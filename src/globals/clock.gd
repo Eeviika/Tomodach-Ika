@@ -18,7 +18,7 @@ var Offset: float = 0.0:
 func _ready() -> void:
     CurrentTime = Time.get_unix_time_from_system()
     TickTime = CurrentTime
-    print("[CLOCK / INFO] Clock initialized.")
+    print("[CLOCK / INFO]: Clock initialized.")
 
 func _process(delta: float) -> void:
     CurrentTime += delta
