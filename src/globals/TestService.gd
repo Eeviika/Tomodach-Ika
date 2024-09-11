@@ -1,7 +1,7 @@
 extends Node
 
 ## Chooses if tests will be handled in Release builds. You should probably keep this off.
-@export var RunInRelease: bool = false
+var RunInRelease: bool = false
 var HandleTests: bool = false
 var TestsToRun: int = 0
 
