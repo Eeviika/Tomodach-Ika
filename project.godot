@@ -21,9 +21,9 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-TestService="*res://src/globals/TestService.gd"
 Clock="*res://src/globals/Clock.gd"
 SaveManager="*res://src/globals/SaveManager.gd"
+TestService="*res://src/globals/TestService.gd"
 
 [debug]
 
