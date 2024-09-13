@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 Clock="*res://src/globals/Clock.gd"
 SaveManager="*res://src/globals/SaveManager.gd"
+PetLoader="*res://src/globals/PetLoader.gd"
 TestService="*res://src/globals/TestService.gd"
 
 [debug]
@@ -63,16 +64,17 @@ gdscript/warnings/function_used_as_property=0
 
 [display]
 
-window/size/viewport_width=950
+window/size/viewport_width=900
 window/size/viewport_height=650
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
 
 [editor]
 
 run/main_run_args="--tests_enabled"
-naming/scene_name_casing=1
-naming/script_name_casing=1
+
+[gui]
+
+theme/custom="res://assets/default_theme.tres"
 
 [rendering]
 
