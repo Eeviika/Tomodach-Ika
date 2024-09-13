@@ -1,0 +1,30 @@
+{
+	"namespace": "internal/dummy",
+	"name": "Dummy",
+	"can_be_given_by_professor": false,
+	"gender": {
+		"can_be_female": true,
+		"female_chance": 50,
+		"can_be_male": true,
+		"male_chance": 50
+	},
+	"biology": {
+		"average_weight": 1,
+		"average_height": 1,
+		"height_mutation": 0.5,
+		"weight_mutation": 0.5,
+		"weight_can_be_influenced": false,
+		"height_can_be_influenced": false
+	},
+	"preferences": {
+		"flavor_preference": 0,
+		"base_happiness": 50,
+		"upset_happiness": 15,
+		"happy_happiness": 50,
+		"delighted_happiness": 70,
+		"loved_happiness": 90
+	},
+	"evolutions": {
+		"internal/dummy": ["EH:50", "random_low"]
+	}
+}
