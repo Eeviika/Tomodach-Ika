@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnoabo74rg3dr"]
+[gd_scene load_steps=5 format=3 uid="uid://bnoabo74rg3dr"]
 
+[ext_resource type="Script" path="res://src/scripts/tutorial.gd" id="1_k64ri"]
 [ext_resource type="AudioStream" uid="uid://kr2auaxxl7qe" path="res://audio/mus_tutorial_p1.ogg" id="1_xq78o"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_trkpj"]
@@ -24,11 +25,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_k64ri")
 metadata/_edit_lock_ = true
 
 [node name="TutorialMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_xq78o")
-autoplay = true
 parameters/looping = true
 
 [node name="BGColors" type="Control" parent="."]
@@ -107,7 +108,7 @@ offset_left = 16.0
 offset_top = 8.0
 offset_right = 880.0
 offset_bottom = 68.0
-text = "Tutorial / Controls["
+text = "Tutorial"
 label_settings = SubResource("LabelSettings_trkpj")
 
 [node name="Contents" type="Control" parent="."]
@@ -148,6 +149,6 @@ offset_left = -255.0
 offset_top = -45.0
 grow_horizontal = 0
 grow_vertical = 0
-text = "(A) or Z - NEXT"
+text = "Confirm - NEXT; Cancel - BACK"
 label_settings = SubResource("LabelSettings_e70ny")
 horizontal_alignment = 2
