@@ -54,6 +54,7 @@ func testCompleted(success: bool, message: String, node: Node) -> void:
 		print("[TESTER / FAIL]: Test \"%s\": %s, %s " % [node.name, success, message])
 		push_warning("Test \"%s\": %s, %s" % [node.name, success, message])
 		node.queue_free()
+	TestsToRun -= 1
 	if TestsToRun == 0:
 		print("[TESTER / INFO]: All tests complete, stopping service.")
 		queue_free()
