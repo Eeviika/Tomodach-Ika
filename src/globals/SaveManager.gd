@@ -19,8 +19,12 @@ const EmptySave: Dictionary = {
 	"Volume": .5,									# Volume of the game. Defaults to 0.5. Should only be between 0 - 1.
 	"Difficulty": GlobalEnums.DIFFICULTY.STANDARD,  # The game difficulty.
 	"LastSave": 0,                                  # Unix timestamp of when the game was last saved.
-	"Birthday": 0,                                  # Unix timestamp of the player's birthday.
 	"Money": 0,										# Money that player currently has.
+	"Birthdate": {									# Birthdate data of the player.
+		"Month": 1,
+		"Day": 2,
+		"Year": 1970
+	},
 	"PetData": {
 		"Name": "",                                 # Name of the pet. Used as a fallback.
 		"Nickname": "",                             # Player-generated nickname of the pet.
