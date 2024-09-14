@@ -16,7 +16,7 @@ const EmptySave: Dictionary = {
 	"Name": "",                                     # Name of the player.
 	"CurrentPetNamespace": null,                    # Namespace of the pet's data file. If a mod named "Example" added a pet named "Pet", the namespace would be "Example/Pet"
 	"ClockOffset": -14400,							# Clock offset. Defaults to EST.
-	"Volume": .5,									# Volume of the game. Defaults to 0.5. Should only be between 0 - 1.
+	"Volume": .7,									# Volume of the game. Defaults to 0.5. Should only be between 0 - 1.
 	"Difficulty": GlobalEnums.DIFFICULTY.STANDARD,  # The game difficulty.
 	"LastSave": 0,                                  # Unix timestamp of when the game was last saved.
 	"Money": 0,										# Money that player currently has.
