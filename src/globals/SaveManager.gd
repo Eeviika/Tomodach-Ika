@@ -12,12 +12,15 @@ const AutoLoadData: bool = true
 const SaveInDebug: bool = false
 
 const EmptySave: Dictionary = {
+	"StartedGame": false,							# Indicates if the player has gone past the tutorial. Files will not save if this is false.
 	"Name": "",                                     # Name of the player.
 	"CurrentPetNamespace": null,                    # Namespace of the pet's data file. If a mod named "Example" added a pet named "Pet", the namespace would be "Example/Pet"
+	"ClockOffset": -14400,							# Clock offset. Defaults to EST.
+	"Volume": .5,									# Volume of the game. Defaults to 0.5. Should only be between 0 - 1.
 	"Difficulty": GlobalEnums.DIFFICULTY.STANDARD,  # The game difficulty.
 	"LastSave": 0,                                  # Unix timestamp of when the game was last saved.
 	"Birthday": 0,                                  # Unix timestamp of the player's birthday.
-	"Money": 0,
+	"Money": 0,										# Money that player currently has.
 	"PetData": {
 		"Name": "",                                 # Name of the pet. Used as a fallback.
 		"Nickname": "",                             # Player-generated nickname of the pet.
@@ -45,7 +48,7 @@ func loadData(force: bool = false) -> void:
 		return
 	BeforeLoadedData.emit()
 	if not FileAccess.file_exists("user://d_slot%s.sav" % SaveSlot):
-		print("[SAVE_MANAGER / INFO]: Generating save data since a save file in slot %s doesn't exist." % SaveSlot)
+		print("[SAVE_MANAGER / INFO]: Generating save data in memory since a save file in slot %s doesn't exist." % SaveSlot)
 		CurrentSave = EmptySave
 		LoadedData.emit(CurrentSave)
 		return

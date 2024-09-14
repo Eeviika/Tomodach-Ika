@@ -9,7 +9,7 @@ var DangerZone: bool = false
 var CurrentTime: float = 0.0
 var TickTime: float = 0.0
 var TickInterval: float = 0.05
-var Offset: float = 0.0:
+var Offset: float = 0:
     get:
         return Offset
     set(value):
@@ -20,6 +20,8 @@ var Offset: float = 0.0:
 
 func _ready() -> void:
     CurrentTime = Time.get_unix_time_from_system()
+    await SaveManager.LoadedData
+    Offset = SaveManager.CurrentSave.ClockOffset
     TickTime = CurrentTime
     print("[CLOCK / INFO]: Clock initialized.")
 
@@ -42,4 +44,4 @@ func _process(delta: float) -> void:
         TicksPassed += 1
 
 func getCurrentTime() -> Dictionary:
-    return Time.get_time_dict_from_unix_time(int(floorf(CurrentTime)))
+    return Time.get_datetime_dict_from_unix_time(int(CurrentTime))
