@@ -12,6 +12,7 @@ config_version=5
 
 config/name="Tomodach-Ika"
 config/version="0.0.1"
+run/main_scene="res://scenes/scr_tutorial.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="IkaMakesGames/Tomodach_ika"
 config/project_settings_override="user://overrides.cfg"
@@ -65,8 +66,7 @@ gdscript/warnings/function_used_as_property=0
 
 [display]
 
-window/size/viewport_width=900
-window/size/viewport_height=650
+window/size/viewport_width=896
 window/stretch/mode="viewport"
 
 [editor]
