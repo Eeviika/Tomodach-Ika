@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bnoabo74rg3dr"]
 
-[ext_resource type="Script" path="res://src/scripts/tutorial.gd" id="1_k64ri"]
-[ext_resource type="AudioStream" uid="uid://kr2auaxxl7qe" path="res://audio/mus_tutorial_p1.ogg" id="1_xq78o"]
+[ext_resource type="Script" path="res://src/scripts/tutorial.gd" id="1_e8iwt"]
+[ext_resource type="AudioStream" uid="uid://kr2auaxxl7qe" path="res://audio/mus_tutorial_p1.ogg" id="2_esrdl"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_trkpj"]
 font_size = 40
@@ -25,11 +25,11 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_k64ri")
+script = ExtResource("1_e8iwt")
 metadata/_edit_lock_ = true
 
 [node name="TutorialMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_xq78o")
+stream = ExtResource("2_esrdl")
 parameters/looping = true
 
 [node name="BGColors" type="Control" parent="."]
