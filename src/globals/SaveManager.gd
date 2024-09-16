@@ -70,6 +70,9 @@ func saveData(data: Dictionary) -> void:
 	if not CurrentSave:
 		print("[SAVE_MANAGER / WARN] No data to save! Not saving data.")
 		return
+	if not CurrentSave.StartedGame:
+		print("[SAVE_MANAGER / WARN: Didn't pass tutorial! Not saving data.")
+		return
 	if OS.is_debug_build() and not SaveInDebug:
 		print("[SAVE_MANAGER / INFO]: SaveInDebug is false, so the current file will not be saved.")
 		return
@@ -78,7 +81,7 @@ func saveData(data: Dictionary) -> void:
 	pass
 
 func _ready() -> void:
-	print("[SAVE_MANAGER / INFO]: acknowledge my existence please :(")
+	print("[SAVE_MANAGER / INFO]: SAVE your games, kids!")
 	if AutoSave:
 		var save_timer: Timer = Timer.new()
 		save_timer.wait_time = AutoSaveInterval
