@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://bw8rdj4ljacvw"]
+[gd_scene load_steps=4 format=3 uid="uid://bw8rdj4ljacvw"]
 
-[ext_resource type="Script" path="res://src/scripts/scr_title.gd" id="1_4hesr"]
+[ext_resource type="Script" path="res://src/scripts/title.gd" id="1_4hesr"]
+[ext_resource type="FontFile" uid="uid://bs7pq3fuo1mls" path="res://assets/fonts/FIRE.ttf" id="2_g2ahg"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ae8b5"]
+font = ExtResource("2_g2ahg")
+font_size = 60
+outline_size = 8
+shadow_size = 0
+shadow_color = Color(8.66354e-07, 0, 0.393425, 1)
+shadow_offset = Vector2(0, 5)
 
 [node name="ScrTitle" type="Node2D"]
+texture_filter = 1
 script = ExtResource("1_4hesr")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 45.0
+text = "TOMODACHIKA"
+label_settings = SubResource("LabelSettings_ae8b5")
