@@ -18,13 +18,33 @@
 	},
 	"preferences": {
 		"flavor_preference": 0,
-		"base_happiness": 50,
 		"upset_happiness": 15,
-		"happy_happiness": 50,
+		"neutral_happiness": 50,
 		"delighted_happiness": 70,
-		"loved_happiness": 90
+		"loved_happiness": 90,
+		"hunger_rate": 1,
+		"saturation_rate": 1,
+		"bedtime": {
+			"hour": 20,
+			"minute": 30,
+			"second": 0
+		},
+		"waketime": {
+			"hour": 8,
+			"minute": 30,
+			"second": 0
+		}
 	},
 	"evolutions": {
-		"internal/dummy": ["EH:50", "random_low"]
+		"internal/dummy": {
+			"can_evolve_at_day": true,
+			"can_evolve_at_night": true,
+			"can_evolve_in_winter": true,
+			"can_evolve_in_spring": true,
+			"can_evolve_in_summer": true,
+			"can_evolve_in_fall": true,
+			"requires_hold_item": null,
+			"required_ev_friendship": 50
+		}
 	}
 }
