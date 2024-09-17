@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bw8rdj4ljacvw"]
+
+[ext_resource type="Script" path="res://src/scripts/scr_title.gd" id="1_4hesr"]
+
+[node name="ScrTitle" type="Node2D"]
+script = ExtResource("1_4hesr")

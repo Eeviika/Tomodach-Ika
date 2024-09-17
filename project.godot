@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Tomodach-Ika"
 config/version="0.0.1"
-run/main_scene="res://scenes/scr_tutorial.tscn"
+run/main_scene="res://scenes/scr_title.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="IkaMakesGames/Tomodach_ika"
 config/project_settings_override="user://overrides.cfg"
@@ -26,7 +26,6 @@ config/icon="res://icon.svg"
 Clock="*res://src/globals/Clock.gd"
 SaveManager="*res://src/globals/SaveManager.gd"
 PetLoader="*res://src/globals/PetLoader.gd"
-TestService="*res://src/globals/TestService.gd"
 
 [debug]
 
