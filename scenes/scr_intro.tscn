@@ -15,7 +15,7 @@ fill_to = Vector2(0, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62jde"]
 bg_color = Color(0, 0, 0, 0.921569)
 
-[node name="Intro" type="Control"]
+[node name="ScrIntro" type="Control"]
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
