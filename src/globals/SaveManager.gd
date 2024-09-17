@@ -66,6 +66,7 @@ func loadData(force: bool = false) -> void:
 	SaveFile.close()
 	print("[SAVE_MANAGER / INFO]: Loaded save file at slot %s." % SaveSlot)
 
+## Saves the current data to disk.
 func saveData(data: Dictionary) -> void:
 	if not CurrentSave:
 		print("[SAVE_MANAGER / WARN] No data to save! Not saving data.")
