@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddpyfdtqea3gb"]
+
+[ext_resource type="Script" path="res://src/scripts/intro.gd" id="1_e8ip4"]
+[ext_resource type="AudioStream" uid="uid://bdisxp4qxdtsa" path="res://audio/mus_intro.ogg" id="2_xyc20"]
+[ext_resource type="Texture2D" uid="uid://d08jd3u5m362d" path="res://assets/prof_official.png" id="3_ydu2d"]
+
+[sub_resource type="Gradient" id="Gradient_cpmtv"]
+colors = PackedColorArray(0.678553, 0.580346, 0.870527, 1, 0.2304, 0.80192, 0.96, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jm50d"]
+gradient = SubResource("Gradient_cpmtv")
+fill_from = Vector2(0, 1)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62jde"]
+bg_color = Color(0, 0, 0, 0.921569)
+
+[node name="Intro" type="Control"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e8ip4")
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_xyc20")
+autoplay = true
+
+[node name="BGGradient" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 896.0
+offset_bottom = 648.0
+texture = SubResource("GradientTexture2D_jm50d")
+metadata/_edit_lock_ = true
+
+[node name="ProfessorSprite" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 348.0
+offset_top = 90.0
+offset_right = 415.0
+offset_bottom = 189.0
+scale = Vector2(3, 3)
+texture = ExtResource("3_ydu2d")
+
+[node name="DialogueContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_top = 712.0
+offset_right = 896.0
+offset_bottom = 848.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_62jde")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueContainer"]
+clip_contents = true
+layout_mode = 2
+
+[node name="DialogueText" type="RichTextLabel" parent="DialogueContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+shortcut_keys_enabled = false
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="finished" from="Music" to="." method="_on_music_finished"]

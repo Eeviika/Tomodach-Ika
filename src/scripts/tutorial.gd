@@ -45,15 +45,22 @@ Controls end here."""
 		3:
 			header.text = "Tutorial / Time Check"
 			var time: Dictionary = Clock.getCurrentTime()
-			print("sys",Time.get_unix_time_from_system())
-			print("clock",Clock.CurrentTime)
 			contentsText.text = "The current time is: {0}:{1}:{2}.\nThe date is: {3}/{4}/{5}.\n\nIf this is not correct, you can always change it later.\n\nThe clock must be correct for some functionality to behave correctly.".format([time.hour, time.minute, time.second, time.month, time.day, time.year])
 		4:
 			header.text = "About (1/2)"
 			contentsText.text = "Tomodach-ika Version {0}\nDeveloped by IKA.\n\nThank you for playing my game!\n\nYou can find details on how to mod and add your own pets on the GitHub's wiki and in the source code's \"docs\" folder.".format([ProjectSettings.get_setting("application/config/version")])
 		5:
 			header.text = "About (2/2)"
-			contentsText.text = "Once you are ready, press CONFIRM again.\n\nThe game will start."
+			contentsText.text = "Once you are ready, press CONFIRM again.\n\nThe game will start.\n\n(The screen might flash a dim gray color... so... epilepsy warning?)" 
+		6:
+			header.text = ""
+			contentsText.text = ""
+			create_tween().tween_property(self, "modulate", Color.from_hsv(0,0,0,1), 1)
+			music.create_tween().tween_property(music, "volume_db", linear_to_db(0.0001), 1)
+			await get_tree().create_timer(1.5).timeout
+			print("[MAIN / INFO]: Switching screen to scr_intro.tscn")
+			get_tree().change_scene_to_file("res://scenes/scr_intro.tscn")
+			return
 		_:
 			tutorial_number = 5
 			newText()
