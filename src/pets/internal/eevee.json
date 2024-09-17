@@ -25,13 +25,5 @@
         "loved_happiness": 90
     },
     "evolutions": {
-        "internal/vaporeon": ["EH:70", "random_low"],
-        "internal/jolteon": ["EH:70", "random_low"],
-        "internal/flareon": ["EH:80", "summer"],
-        "internal/glaceon": ["EH:80", "winter"],
-        "internal/leafeon": ["EH:80", "fall"],
-        "internal/sylveon": ["EH:80", "spring"],
-        "internal/umbreon": ["EH:90", "night"],
-        "internal/espeon": ["EH:90", "day"]
     }
 }
