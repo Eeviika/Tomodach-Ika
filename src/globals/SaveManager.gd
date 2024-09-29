@@ -14,7 +14,7 @@ const SaveInDebug: bool = false
 const EmptySave: Dictionary = {
 	"StartedGame": false,							# Indicates if the player has gone past the tutorial. Files will not save if this is false.
 	"Name": "",                                     # Name of the player.
-	"CurrentPetNamespace": null,                    # Namespace of the pet's data file. If a mod named "Example" added a pet named "Pet", the namespace would be "Example/Pet"
+	"CurrentPetNamespace": "internal/dummy",        # Namespace of the pet's data file. If a mod named "Example" added a pet named "Pet", the namespace would be "Example/Pet"
 	"ClockOffset": -14400,							# Clock offset. Defaults to EST.
 	"Volume": .7,									# Volume of the game. Defaults to 0.5. Should only be between 0 - 1.
 	"Difficulty": GlobalEnums.DIFFICULTY.STANDARD,  # The game difficulty.
@@ -22,7 +22,7 @@ const EmptySave: Dictionary = {
 	"Money": 0,										# Money that player currently has.
 	"Birthdate": {									# Birthdate data of the player.
 		"Month": 1,
-		"Day": 2,
+		"Day": 1,
 		"Year": 1970
 	},
 	"PetData": {
@@ -42,36 +42,49 @@ const EmptySave: Dictionary = {
 	}
 }
 
-var SaveSlot: int = 0
-var CurrentSave: Dictionary
+var save_slot: int = 0
+var current_save: Dictionary
+
+func update_data() -> void:
+	if not current_save:
+		print("[SAVE_MANAGER / WARN]: Attempted to update save data without loading it first!")
+		return
+	if current_save.has_all(EmptySave.keys()):
+		print("[SAVE_MANAGER / INFO]: No data to update.")
+		return
+	print("[SAVE_MANAGER / INFO]: Updating save data.")
+	for key: String in EmptySave.keys():
+		
+		current_save.get_or_add(key, EmptySave[key])
 
 ## Attempts to load data from disk. If data is already loaded and [code]<force: bool>[/code] is off then data will not be loaded from disk.
-func loadData(force: bool = false) -> void:
-	if CurrentSave and not (force or CurrentSave == EmptySave):
+func load_data(force: bool = false) -> void:
+	if current_save and not (force or current_save == EmptySave):
 		print("[SAVE_MANAGER / INFO]: Save already loaded, not loading again since param FORCE is off.")
 		return
 	BeforeLoadedData.emit()
-	if not FileAccess.file_exists("user://d_slot%s.sav" % SaveSlot):
-		print("[SAVE_MANAGER / INFO]: Generating save data in memory since a save file in slot %s doesn't exist." % SaveSlot)
-		CurrentSave = EmptySave
-		LoadedData.emit(CurrentSave)
+	if not FileAccess.file_exists("user://d_slot%s.sav" % save_slot):
+		print("[SAVE_MANAGER / INFO]: Generating save data in memory since a save file in slot %s doesn't exist." % save_slot)
+		current_save = EmptySave
+		LoadedData.emit(current_save)
 		return
-	var SaveFile: FileAccess = FileAccess.open("user://d_slot%s.sav" % SaveSlot, FileAccess.READ)
+	var SaveFile: FileAccess = FileAccess.open("user://d_slot%s.sav" % save_slot, FileAccess.READ)
 	if SaveFile == null:
 		print("[SAVE_MANAGER / WARN]: Failed to load save! See error below:")
 		print(FileAccess.get_open_error())
 		return
-	CurrentSave = SaveFile.get_var()
-	LoadedData.emit(CurrentSave)
+	current_save = SaveFile.get_var()
+	update_data()
+	LoadedData.emit(current_save)
 	SaveFile.close()
-	print("[SAVE_MANAGER / INFO]: Loaded save file at slot %s." % SaveSlot)
+	print("[SAVE_MANAGER / INFO]: Loaded save file at slot %s." % save_slot)
 
 ## Saves the current data to disk.
-func saveData(data: Dictionary) -> void:
-	if not CurrentSave:
+func save_data(data: Dictionary) -> void:
+	if not current_save:
 		print("[SAVE_MANAGER / WARN] No data to save! Not saving data.")
 		return
-	if not CurrentSave.StartedGame:
+	if not current_save.StartedGame:
 		print("[SAVE_MANAGER / WARN: Didn't pass tutorial! Not saving data.")
 		return
 	if OS.is_debug_build() and not SaveInDebug:
@@ -90,10 +103,10 @@ func _ready() -> void:
 		save_timer.autostart = true
 		save_timer.timeout.connect(func()->void:
 			print("[SAVE_MANAGER / INFO] Attempting autosave.")
-			saveData(CurrentSave)
+			save_data(current_save)
 		)
 		add_child(save_timer)
 	if AutoLoadData:
 		print("[SAVE_MANAGER / INFO]: Autoloading data.")
-		loadData()
+		load_data()
 		pass
