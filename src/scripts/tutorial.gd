@@ -44,7 +44,7 @@ CIRCLE BUTTON (PS)
 Controls end here."""
 		3:
 			header.text = "Tutorial / Time Check"
-			var time: Dictionary = Clock.getCurrentTime()
+			var time: Dictionary = Clock.get_current_time()
 			contentsText.text = "The current time is: {0}:{1}:{2}.\nThe date is: {3}/{4}/{5}.\n\nIf this is not correct, you can always change it later.\n\nThe clock must be correct for some functionality to behave correctly.".format([time.hour, time.minute, time.second, time.month, time.day, time.year])
 		4:
 			header.text = "About (1/2)"
@@ -74,14 +74,14 @@ Controls end here."""
 func _ready() -> void:
 	block_input = true
 	modulate = Color.from_hsv(0,0,0,1)
-	if not SaveManager.CurrentSave:
+	if not SaveManager.current_save:
 		await SaveManager.LoadedData
-	if SaveManager.CurrentSave.StartedGame == true:
+	if SaveManager.current_save.StartedGame == true:
 		pass # TODO: Run some code that puts the player at the start screen.
 		return
 	create_tween().tween_property(self, "modulate", Color.from_hsv(0,0,1,1), 1)
 	music.play()
 	music.volume_db = linear_to_db(0.01)
-	music.create_tween().tween_property(music, "volume_db", linear_to_db(SaveManager.CurrentSave.Volume), 2.5).set_trans(Tween.TRANS_LINEAR)
+	music.create_tween().tween_property(music, "volume_db", linear_to_db(SaveManager.current_save.Volume), 2.5).set_trans(Tween.TRANS_LINEAR)
 	await get_tree().create_timer(1.1).timeout
 	block_input = false
