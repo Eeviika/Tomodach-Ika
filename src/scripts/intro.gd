@@ -11,7 +11,7 @@ var input_blocked: bool = true
 func _ready() -> void:
 	modulate = Color.from_hsv(0,0,0,1)
 	create_tween().tween_property(self, "modulate", Color.from_hsv(0,0,1,1), 1.5)
-	AudioServer.set_bus_volume_db(0, linear_to_db(SaveManager.CurrentSave.Volume))
+	AudioServer.set_bus_volume_db(0, linear_to_db(SaveManager.current_save.Volume))
 	music.volume_db = linear_to_db(0.03)
 	music.create_tween().tween_property(music, "volume_db", linear_to_db(1), 1.5)
 	loop_music.loop = true
