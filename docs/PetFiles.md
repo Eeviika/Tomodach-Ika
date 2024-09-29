@@ -31,14 +31,19 @@ Speaking of which, do not delete that file, under any circumstances.
 		"height_mutation": 0.5,
 		"weight_mutation": 0.5,
 		"weight_can_be_influenced": false,
-		"height_can_be_influenced": false
+		"height_can_be_influenced": false,
+		"collision_shape_radius": 0,
+		"collision_shape_offset": {
+			"x": 0,
+			"y": 0
+		}
 	},
 	"preferences": {
-		"flavor_preference": 2,
-		"upset_happiness": 0,
-		"neutral_happiness": 25,
-		"delighted_happiness": 55,
-		"loved_happiness": 85,
+		"flavor_preference": 0,
+		"upset_happiness": 15,
+		"neutral_happiness": 50,
+		"delighted_happiness": 70,
+		"loved_happiness": 90,
 		"hunger_rate": 1,
 		"saturation_rate": 1,
 		"bedtime": {
@@ -97,7 +102,7 @@ Does not apply if the pet is genderless.
 
 ### Average Weight / Height
 
-Determines the average weight / height for the pet. This is the initial scale for the pet.
+Determines the average weight (KG) / height (CM) for the pet.
 
 ### Weight / Height Mutation
 
@@ -106,6 +111,18 @@ The range of "mutation". Basically, the weight / height range of which a newly b
 ### Weight / Height Can Be Influenced
 
 Boolean that determines if the weight / height of a pet can be influenced by gameplay actions. I.E: Eating food increases weight, or sleeping for long periods of time increases height.
+
+### Scale
+
+Scale of the sprite. This also affects the collision shape size. This should NEVER be less than or equal to 0.
+
+### Collision Shape Radius
+
+Determines how big the hitbox for the pet should be. You would typically set this to half of the pet's sprite height. If you're unsure, refer to PetSprites.md.
+
+### Collision Shape Offset X/Y
+
+Offsets the hitbox. By default, the hitbox is in the center of the sprite. If you're unsure, refer to PetSprites.md.
 
 ## Preference Variables
 
