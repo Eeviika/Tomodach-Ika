@@ -19,7 +19,8 @@ config/project_settings_override="user://overrides.cfg"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 run/max_fps=60
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://icon.svg"
+config/icon="res://assets/icons/default.png"
+config/windows_native_icon="res://assets/icons/default.ico"
 
 [autoload]
 
