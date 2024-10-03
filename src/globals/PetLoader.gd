@@ -34,6 +34,13 @@ func load_pet(pet_namespace: String) -> Dictionary:
 func build_sprite_frames(pet_namespace: String) -> SpriteFrames: # I hate the way I programmed this so much
 	var new_sprite_frames: SpriteFrames							 # if anyone makes a better way i will pay you $100 /j
 	var animations_needed: Array[String] = ["fall_left", "fall_right", "idle_happy", "idle_neutral", "idle_upset", "jump_left", "jump_right", "walk_left", "walk_right"]
+	var animations_loop: Array[String] = [
+		"idle_happy",
+		"idle_neutral",
+		"idle_upset",
+		"walk_left",
+		"walk_right",
+	]
 	var trimmed_namespace: String = pet_namespace.substr(pet_namespace.find("/")+1)
 	if not namespaces.get(pet_namespace): # We return dummy instead of stopping because stopping would be problematic for the game. It'd be better to fallback to dummy.
 		print("[PET_LOADER / WARN]: Tried to build SpriteFrames for a pet that does not exist (%s), returning Dummy." % pet_namespace)
@@ -74,5 +81,15 @@ func build_sprite_frames(pet_namespace: String) -> SpriteFrames: # I hate the wa
 			var img: Resource = load(file_path_of_assets + "/" + animation_name + str(i) + ".png")
 			animation_table[animation_name].append(img)
 			i += 1
+	# Finally, compile these loaded sprites into the spriteframes.
+	for animation_name: String in animation_table.keys():
+		for texture: Texture2D in animation_table[animation_name]:
+			new_sprite_frames.add_frame(animation_name, texture)
+	# Loop some specific animations...
+	for animation_name: String in animations_loop:
+		if not new_sprite_frames.has_animation(animation_name):
+			continue
+		new_sprite_frames.set_animation_loop(animation_name, true)
 	
+	# And we are done!
 	return new_sprite_frames
