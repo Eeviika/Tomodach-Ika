@@ -17,4 +17,5 @@ func _ready() -> void:
     hitbox.shape = collision_shape
     hitbox.position = Vector2(current_pet_data.biology.collision_shape_offset.x, current_pet_data.biology.collision_shape_offset.y)
     # Load the sprites.
-    
+    var sprite_frames: SpriteFrames = PetLoader.build_sprite_frames(current_pet_namespace)
+    animated_sprite.sprite_frames = sprite_frames
