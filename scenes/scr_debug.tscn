@@ -1,3 +1,3 @@
 [gd_scene format=3 uid="uid://1uvfqrayv3f3"]
 
-[node name="ScrTest" type="Node2D"]
+[node name="ScrDebug" type="Node2D"]
