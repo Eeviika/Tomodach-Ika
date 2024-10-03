@@ -7,7 +7,11 @@ var namespaces: Dictionary = {
 }
 
 var cached_sprite_frames: Dictionary = {
+	# "internal/dummy" = [SomeSpriteFramesReference] --- Example of what items in here would look like. 
+}
 
+var cached_pet_data: Dictionary = {
+	# "internal/dummy" = {...} --- Example of what items in here would look like. 
 }
 
 func _ready() -> void:
@@ -29,6 +33,7 @@ func load_pet(pet_namespace: String) -> Dictionary:
 	json_file = FileAccess.open(namespaces.get(pet_namespace), FileAccess.READ)
 	json_string = json_file.get_as_text()
 	json_file.close()
+	cached_pet_data[pet_namespace] = JSON.parse_string(json_string)
 	return JSON.parse_string(json_string)
 
 func build_sprite_frames(pet_namespace: String) -> SpriteFrames: # I hate the way I programmed this so much
@@ -92,4 +97,5 @@ func build_sprite_frames(pet_namespace: String) -> SpriteFrames: # I hate the wa
 		new_sprite_frames.set_animation_loop(animation_name, true)
 	
 	# And we are done!
+	cached_sprite_frames[pet_namespace] = new_sprite_frames
 	return new_sprite_frames
