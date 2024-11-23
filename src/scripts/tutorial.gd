@@ -76,12 +76,12 @@ func _ready() -> void:
 	modulate = Color.from_hsv(0,0,0,1)
 	if not SaveManager.current_save:
 		await SaveManager.LoadedData
-	if SaveManager.current_save.StartedGame == true:
+	if SaveManager.current_save.started_game == true:
 		pass # TODO: Run some code that puts the player at the start screen.
 		return
 	create_tween().tween_property(self, "modulate", Color.from_hsv(0,0,1,1), 1)
 	music.play()
 	music.volume_db = linear_to_db(0.01)
-	music.create_tween().tween_property(music, "volume_db", linear_to_db(SaveManager.current_save.Volume), 2.5).set_trans(Tween.TRANS_LINEAR)
+	music.create_tween().tween_property(music, "volume_db", linear_to_db(SaveManager.current_save.volume), 2.5).set_trans(Tween.TRANS_LINEAR)
 	await get_tree().create_timer(1.1).timeout
 	block_input = false
