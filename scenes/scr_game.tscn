@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://lqhfwjexko5o"]
+
+[ext_resource type="PackedScene" uid="uid://mf2crs6s88xv" path="res://scenes/obj_pet.tscn" id="1_ux011"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6mfhu"]
+size = Vector2(896, 72)
+
+[node name="ScrGame" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(448, 576)
+scale = Vector2(1, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_6mfhu")
+
+[node name="ObjPet" parent="." instance=ExtResource("1_ux011")]
+position = Vector2(448, 80)
