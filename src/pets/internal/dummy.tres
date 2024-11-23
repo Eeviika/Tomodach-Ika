@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://dkkxl38yx4pux"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://dkkxl38yx4pux"]
 
 [ext_resource type="Texture2D" uid="uid://dw3ya66seefpn" path="res://assets/dummypet.png" id="1_i5r3l"]
+[ext_resource type="Texture2D" uid="uid://d1y7f8qlhsofi" path="res://assets/egg.png" id="1_kmvya"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jvir1"]
 atlas = ExtResource("1_i5r3l")
@@ -56,6 +57,14 @@ region = Rect2(136, 0, 16, 16)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_kmvya")
+}],
+"loop": true,
+"name": &"egg",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_jvir1")

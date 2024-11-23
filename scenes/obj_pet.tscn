@@ -1,16 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://mf2crs6s88xv"]
+[gd_scene load_steps=2 format=3 uid="uid://mf2crs6s88xv"]
 
 [ext_resource type="Script" path="res://src/scripts/pet.gd" id="1_p15xb"]
-[ext_resource type="SpriteFrames" uid="uid://dkkxl38yx4pux" path="res://src/pets/internal/dummy.tres" id="2_m7dn4"]
 
 [node name="ObjPet" type="CharacterBody2D"]
 texture_filter = 1
 position = Vector2(96, 88)
-scale = Vector2(3, 3)
 script = ExtResource("1_p15xb")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = ExtResource("2_m7dn4")
-animation = &"idle_neutral"
-
 [node name="Hitbox" type="CollisionShape2D" parent="."]
+z_index = 10
+z_as_relative = false
+debug_color = Color(0.423529, 0.439216, 0.913725, 0.419608)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
