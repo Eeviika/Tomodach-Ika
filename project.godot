@@ -25,6 +25,7 @@ config/windows_native_icon="res://assets/icons/default.ico"
 [autoload]
 
 Clock="*res://src/globals/Clock.gd"
+BatterySaver="*res://src/globals/BatterySaver.gd"
 SaveManager="*res://src/globals/SaveManager.gd"
 PetLoader="*res://src/globals/PetLoader.gd"
 
@@ -68,6 +69,7 @@ gdscript/warnings/function_used_as_property=0
 
 window/size/viewport_width=896
 window/stretch/mode="viewport"
+window/stretch/aspect="keep_height"
 
 [editor]
 
@@ -97,6 +99,10 @@ ui_cancel={
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":120,"location":0,"echo":false,"script":null)
 ]
 }
+
+[physics]
+
+2d/default_gravity=780.0
 
 [rendering]
 
