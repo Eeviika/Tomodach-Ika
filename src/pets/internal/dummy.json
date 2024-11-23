@@ -15,7 +15,7 @@
 		"weight_mutation": 0.5,
 		"weight_can_be_influenced": false,
 		"height_can_be_influenced": false,
-		"scale": 1,
+		"scale": 4,
 		"collision_shape_radius": 7,
 		"collision_shape_offset": {
 			"x": 0,
