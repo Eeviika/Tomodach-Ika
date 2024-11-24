@@ -6,7 +6,7 @@ const IDLE_TIME: int = 60
 var IdleTimer: Timer
 
 var logger: Logger
-var max_fps: float
+var max_fps: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,7 +20,7 @@ func _ready() -> void:
 	
 	logger.info("Battery Saver is enabled.")
 
-	max_fps = ProjectSettings.get_setting("application/run/max_fps")
+	max_fps = Engine.max_fps
 	
 	IdleTimer = Timer.new()
 	IdleTimer.wait_time = IDLE_TIME
@@ -31,15 +31,15 @@ func _ready() -> void:
 	IdleTimer.timeout.connect(_idle_timeout)
 	
 func _idle_timeout() -> void:
-	logger.info("Idle timeout reached. Setting max FPS to %f." %  int(max_fps / 2))
-	ProjectSettings.set_setting("application/run/max_fps", int(max_fps / 2))
+	logger.info("Idle timeout reached. Setting max FPS to %f." %  (max_fps / 2))
+	Engine.max_fps = max_fps / 2
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventScreenTouch or event is InputEventKey:
 		IdleTimer.start()
 		if ProjectSettings.get_setting("application/run/max_fps") != max_fps:
-			logger.info("User input detected. Setting max FPS to %f." % int(max_fps))
-			ProjectSettings.set_setting("application/run/max_fps", max_fps)
+			logger.info("User input detected. Setting max FPS to %f." % max_fps)
+			Engine.max_fps = max_fps
 
 func _process(_delta: float) -> void:
 	if not DisplayServer.window_is_focused() and not ProjectSettings.get_setting("application/run/low_processor_mode"):
