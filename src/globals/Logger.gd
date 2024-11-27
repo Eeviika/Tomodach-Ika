@@ -66,4 +66,3 @@ func warn(message: String) -> void:
 
 func error(message: String) -> void:
 	_log_message(MessageLevels.ERROR, message)
-

@@ -31,8 +31,9 @@ func _ready() -> void:
 	IdleTimer.timeout.connect(_idle_timeout)
 	
 func _idle_timeout() -> void:
+	# Ignore warning, this is intentional.
 	logger.info("Idle timeout reached. Setting max FPS to %f." %  (max_fps / 2))
-	Engine.max_fps = max_fps / 2
+	Engine.max_fps = max_fps / 2	
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion or event is InputEventScreenTouch or event is InputEventKey:
