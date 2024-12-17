@@ -1,4 +1,3 @@
-<!-- markdownlint-disable-file MD010 -->
 # Pet Files
 
 ## Important Notes
@@ -15,59 +14,59 @@ Speaking of which, do not delete that file, under any circumstances.
 
 ```json
 {
-	"namespace": "internal/dummy",
-	"name": "Dummy",
-	"can_be_given_by_professor": false,
-	"gender": {
-		"can_be_female": true,
-		"female_chance": 50,
-		"can_be_male": true,
-		"male_chance": 50
-	},
-	"biology": {
-		"average_weight": 1,
-		"average_height": 1,
-		"height_mutation": 0.5,
-		"weight_mutation": 0.5,
-		"weight_can_be_influenced": false,
-		"height_can_be_influenced": false,
-		"collision_shape_radius": 0,
-		"collision_shape_offset": {
-			"x": 0,
-			"y": 0
-		}
-	},
-	"preferences": {
-		"flavor_preference": 0,
-		"upset_happiness": 15,
-		"neutral_happiness": 50,
-		"delighted_happiness": 70,
-		"loved_happiness": 90,
-		"hunger_rate": 1,
-		"saturation_rate": 1,
-		"bedtime": {
-			"hour": 20,
-			"minute": 30,
-			"second": 0
-		},
-		"waketime": {
-			"hour": 8,
-			"minute": 30,
-			"second": 0
-		}
-	},
-	"evolutions": {
-		"internal/dummy": {
-			"can_evolve_at_day": true,
-			"can_evolve_at_night": true,
-			"can_evolve_in_winter": true,
-			"can_evolve_in_spring": true,
-			"can_evolve_in_summer": true,
-			"can_evolve_in_fall": true,
-			"requires_hold_item": null,
-			"required_ev_friendship": 50
-		}
-	}
+ "namespace": "internal/dummy",
+ "name": "Dummy",
+ "can_be_given_by_professor": false,
+ "gender": {
+  "can_be_female": true,
+  "female_chance": 50,
+  "can_be_male": true,
+  "male_chance": 50
+ },
+ "biology": {
+  "average_weight": 1,
+  "average_height": 1,
+  "height_mutation": 0.5,
+  "weight_mutation": 0.5,
+  "weight_can_be_influenced": false,
+  "height_can_be_influenced": false,
+  "collision_shape_radius": 0,
+  "collision_shape_offset": {
+   "x": 0,
+   "y": 0
+  }
+ },
+ "preferences": {
+  "flavor_preference": 0,
+  "upset_happiness": 15,
+  "neutral_happiness": 50,
+  "delighted_happiness": 70,
+  "loved_happiness": 90,
+  "hunger_rate": 1,
+  "saturation_rate": 1,
+  "bedtime": {
+   "hour": 20,
+   "minute": 30,
+   "second": 0
+  },
+  "waketime": {
+   "hour": 8,
+   "minute": 30,
+   "second": 0
+  }
+ },
+ "evolutions": {
+  "internal/dummy": {
+   "can_evolve_at_day": true,
+   "can_evolve_at_night": true,
+   "can_evolve_in_winter": true,
+   "can_evolve_in_spring": true,
+   "can_evolve_in_summer": true,
+   "can_evolve_in_fall": true,
+   "requires_hold_item": null,
+   "required_ev_friendship": 50
+  }
+ }
 }
 ```
 
