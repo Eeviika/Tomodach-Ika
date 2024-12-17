@@ -28,6 +28,9 @@ var collision_shape: CircleShape2D
 
 var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _is_moving() -> bool:
+	return velocity.y != 0.0 or velocity.x != 0.0
+
 func _ready() -> void:
 	# Connect the tick function
 	Clock.Tick.connect(_tick_event)
