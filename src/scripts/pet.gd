@@ -1,11 +1,12 @@
 extends CharacterBody2D
+class_name Pet
 
 const interpolation: bool = true
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: CollisionShape2D = $Hitbox
 
-var current_pet_stats: Dictionary = {
+var pet_stats: Dictionary = {
 		# "generated": false,                           # Flag that determines whether to generate new data. Used when obtaining a new pet.
 		# "name": "",                                   # Name of the pet. Used as a fallback.
 		# "nickname": "",                               # Player-generated nickname of the pet.
@@ -17,12 +18,12 @@ var current_pet_stats: Dictionary = {
 		# "height": 0,                                  # Height of the pet. Is not AverageHeight.
 		# "hunger": 0,                                  # How hungry the pet is from 1 - 100, where 100 is full, and 0 is starving.
 		# "enjoyment": 0,                               # How much the pet enjoys the player's company.
-		# "happiness": 0,                               # How happy the pet is with the player.
+		# "happiness": 0,                               # How happy the pet is.
 		# "evolution_happiness": 0,                     # How inclined the pet is to evolve (if it can).
 		# "flavor_preference": 0,                       # The pet's flavor preference.
 }
 
-var current_pet_data: Dictionary
+var pet_data: Dictionary
 var collision_shape: CircleShape2D
 
 var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -34,38 +35,38 @@ func _ready() -> void:
 	if not SaveManager.current_save:
 		await SaveManager.LoadedData
 	var current_pet_namespace: String = SaveManager.current_save.get("current_pet_namespace", "internal/dummy")
-	current_pet_data = PetLoader.load_pet(current_pet_namespace)
-	current_pet_stats = SaveManager.current_save.pet_data.duplicate()
+	pet_data = PetLoader.load_pet(current_pet_namespace)
+	pet_stats = SaveManager.current_save.pet_data.duplicate()
 	# If we don't have a name set, then generate data for save.
-	if not current_pet_stats.generated:
+	if not pet_stats.generated:
 		_create_data()
 	# Create the hitbox using the pet_data info.
 	collision_shape = CircleShape2D.new()
-	collision_shape.radius = current_pet_data.biology.collision_shape_radius
+	collision_shape.radius = pet_data.biology.collision_shape_radius
 	hitbox.shape = collision_shape
-	hitbox.position = Vector2(current_pet_data.biology.collision_shape_offset.x, current_pet_data.biology.collision_shape_offset.y)
+	hitbox.position = Vector2(pet_data.biology.collision_shape_offset.x, pet_data.biology.collision_shape_offset.y)
 	# Load the sprites.
 	var sprite_frames: SpriteFrames = PetLoader.build_sprite_frames(current_pet_namespace)
 	animated_sprite.sprite_frames = sprite_frames
 	animated_sprite.play("idle_neutral")
 	# Scale the pet.
-	scale *= current_pet_data.biology.scale
+	scale *= pet_data.biology.scale
 
 func _create_data() -> void:
-	current_pet_stats.generated = true
-	current_pet_stats.name = current_pet_data.name
-	current_pet_stats.nickname = ""
-	current_pet_stats.original_owner = SaveManager.current_save.name
-	current_pet_stats.state = GlobalEnums.PET_STATE.EGG
-	current_pet_stats.gender = GlobalEnums.PET_GENDER.GENDERLESS
-	current_pet_stats.adoption_time = Clock.current_time
-	current_pet_stats.weight = current_pet_data.biology.average_weight + randf_range(-current_pet_data.biology.weight_mutation, current_pet_data.biology.weight_mutation)
-	current_pet_stats.height = current_pet_data.biology.average_height + randf_range(-current_pet_data.biology.height_mutation, current_pet_data.biology.height_mutation)
-	current_pet_stats.hunger = 50
-	current_pet_stats.enjoyment = 50
-	current_pet_stats.happiness = current_pet_data.preferences.neutral_happiness + 1
-	current_pet_stats.evolution_happiness = 0
-	current_pet_stats.flavor_preference = current_pet_data.preferences.flavor_preference
+	pet_stats.generated = true
+	pet_stats.name = pet_data.name
+	pet_stats.nickname = ""
+	pet_stats.original_owner = SaveManager.current_save.name
+	pet_stats.state = GlobalEnums.PET_STATE.EGG
+	pet_stats.gender = GlobalEnums.PET_GENDER.GENDERLESS
+	pet_stats.adoption_time = Clock.current_time
+	pet_stats.weight = pet_data.biology.average_weight + randf_range(-pet_data.biology.weight_mutation, pet_data.biology.weight_mutation)
+	pet_stats.height = pet_data.biology.average_height + randf_range(-pet_data.biology.height_mutation, pet_data.biology.height_mutation)
+	pet_stats.hunger = 50
+	pet_stats.enjoyment = 50
+	pet_stats.happiness = pet_data.preferences.neutral_happiness + 1
+	pet_stats.evolution_happiness = 0
+	pet_stats.flavor_preference = pet_data.preferences.flavor_preference
 
 func _physics_process(delta: float) -> void:
 	# Handle gravity
@@ -79,7 +80,7 @@ func _physics_process(delta: float) -> void:
 
 func _animate() -> void:
 	var normalized_velocity: Vector2 = velocity.normalized()
-	if current_pet_stats.state == GlobalEnums.PET_STATE.EGG:
+	if pet_stats.state == GlobalEnums.PET_STATE.EGG:
 		animated_sprite.play("egg")
 		return
 	if normalized_velocity == Vector2(0, 0):
@@ -105,7 +106,7 @@ func _animate() -> void:
 		return
 
 func jump() -> void:
-	if current_pet_stats.state == GlobalEnums.PET_STATE.EGG:
+	if pet_stats.state == GlobalEnums.PET_STATE.EGG:
 		return
 	velocity.y -= 500
 	velocity.x += randf_range(-2.50, 2.50)

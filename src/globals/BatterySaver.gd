@@ -31,11 +31,12 @@ func _ready() -> void:
 	IdleTimer.timeout.connect(_idle_timeout)
 	
 func _idle_timeout() -> void:
-	# Ignore warning, this is intentional.
-	logger.info("Idle timeout reached. Setting max FPS to %f." %  (max_fps / 2))
-	Engine.max_fps = max_fps / 2	
+	var new_fps: int = int(max_fps / 2.0)
+	logger.info("Idle timeout reached. Setting max FPS to %f." %  new_fps)
+	Engine.max_fps = new_fps
 
 func _input(event: InputEvent) -> void:
+	if not IdleTimer: return;
 	if event is InputEventMouseMotion or event is InputEventScreenTouch or event is InputEventKey:
 		IdleTimer.start()
 		if ProjectSettings.get_setting("application/run/max_fps") != max_fps:

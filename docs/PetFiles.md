@@ -1,5 +1,4 @@
 <!-- markdownlint-disable-file MD010 -->
-<!-- Can't figure out how to disable that rule in VSCODE's config, so we're just doing that for now. -->
 # Pet Files
 
 ## Important Notes
@@ -7,7 +6,7 @@
 - The folder your pet file is in must be unique or issues may arise.
 - If any values are missing / left blank, it will be replaced with values from `src/pets/internal/dummy.json`
 - If your JSON file is invalid, your pet(s) may not be imported.
-- If you want to make sprites for your pets, see `PetSprites.md`. Make sure the folder where the sprites are located is the same name as this pet file.
+- If you want to make sprites for your pets, see `PetSprites.md`. Make sure the folder where the sprites are located is the same name as the pet file.
 
 ## Quick Reference
 
@@ -76,7 +75,7 @@ Speaking of which, do not delete that file, under any circumstances.
 
 ### Namespace
 
-Refers to the path that you would find the pet at. This may be used in the future, but does nothing right now.
+Refers to the path that you would find the pet at. The standard form for this is `mod_name/pet_name`. This may be used in the future, but does nothing right now.
 
 ### Name
 

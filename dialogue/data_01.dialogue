@@ -1,0 +1,65 @@
+using PetLoader
+
+~ loved_pet
+% {{get_pet_name()}}: * {{get_pet_name()}} loves spending time with you.
+% {{get_pet_name()}}: * {{get_pet_name()}} stares at you happily.
+% {{get_pet_name()}}: * {{get_pet_name()}} sings a familiar tune.
+% {{get_pet_name()}}: * {{get_pet_name()}} makes sure you're okay.
+% {{get_pet_name()}}: * {{get_pet_name()}} saw you look at it, [wait=0.5]and smiled.
+=> END
+
+~ delighted_pet
+% {{get_pet_name()}}: * {{get_pet_name()}} hops around excitedly.
+% {{get_pet_name()}}: * {{get_pet_name()}} playfully nudges you.
+% {{get_pet_name()}}: * {{get_pet_name()}} hums a cheerful melody.
+% {{get_pet_name()}}: * {{get_pet_name()}} giggles, [wait=0.5]then abruptly stops.
+% {{get_pet_name()}}: * {{get_pet_name()}} does a little dance just for you.
+=> END
+
+~ neutral_pet
+% {{get_pet_name()}}: * {{get_pet_name()}} sits quietly and observes you.
+% {{get_pet_name()}}: * {{get_pet_name()}} tilts its head, [wait=0.5]as if thinking deeply.
+% {{get_pet_name()}}: * {{get_pet_name()}} rests comfortably by your side.
+% {{get_pet_name()}}: * {{get_pet_name()}} glances at you with a calm expression.
+% {{get_pet_name()}}: * {{get_pet_name()}} lets out a soft sigh and settles down.
+=> END
+
+~ upset_pet
+% {{get_pet_name()}}: * {{get_pet_name()}} turns away, [wait=0.5]avoiding your gaze.
+% {{get_pet_name()}}: * {{get_pet_name()}} lets out a small huff and stays quiet.
+% {{get_pet_name()}}: * {{get_pet_name()}} fidgets, [wait=0.5]clearly uncomfortable.
+% {{get_pet_name()}}: * {{get_pet_name()}} gives you a sad look and lowers its head.
+% {{get_pet_name()}}: * {{get_pet_name()}} growls softly.
+
+=> END
+
+~ sick_pet
+{{get_pet_name()}}: * {{get_pet_name()}} seems sick.
+	Some medicine might help.
+=> END
+
+~ status_check
+* Your pet, [wait=0.5]{{get_pet_name()}}, [wait=0.5]is [wave amp=25 freq=5]{{get_pet_state_as_string()}}.[/wave]
+if current_pet.pet_stats.hunger >= 90
+	* They are full.
+elif current_pet.pet_stats.hunger >= 40
+	* They are not too hungry.
+else
+	* They are hungry.
+if current_pet.pet_stats.happiness >= 90
+	* They are very happy.
+elif current_pet.pet_stats.happiness >= 40
+	* They are okay.
+else
+	* They are bored.
+if current_pet.pet_stats.enjoyment >= 80
+	* They really enjoy your company.
+elif current_pet.pet_stats.enjoyment >= 50
+	* They like you.
+elif current_pet.pet_stats.enjoyment >= 30
+	* They tolerate you.
+else
+	* They don't seem to like you too much right now...
+* End check.
+=> END
+

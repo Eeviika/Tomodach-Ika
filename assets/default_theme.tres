@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://dxce83f84fyhk"]
 
-[ext_resource type="FontFile" uid="uid://bs7pq3fuo1mls" path="res://assets/fonts/FIRE.ttf" id="1_b46ky"]
+[ext_resource type="FontFile" uid="uid://blov6y70suari" path="res://assets/fonts/EARTH.otf" id="1_sq83u"]
 
 [resource]
-default_font = ExtResource("1_b46ky")
-default_font_size = 30
+default_font = ExtResource("1_sq83u")
+default_font_size = 35

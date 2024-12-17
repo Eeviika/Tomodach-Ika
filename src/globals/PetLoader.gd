@@ -16,6 +16,8 @@ var cached_pet_data: Dictionary = {
 	# "internal/dummy" = {...} --- Example of what items in here would look like. 
 }
 
+var current_pet: CharacterBody2D = null
+
 func _ready() -> void:
 	logger = Logger.new(self)
 	if not DirAccess.dir_exists_absolute(USERPETSFOLDER):
@@ -25,6 +27,28 @@ func _ready() -> void:
 		var namesp: String = "internal/" + file.split(".json")[0]
 		namesp.to_lower()
 		namespaces[namesp] = "res://src/pets/internal/" + file
+
+func assign_current_pet(pet: CharacterBody2D) -> void:
+	logger.info("Assigning current pet to %s." % pet.name)
+	current_pet = pet
+
+func get_pet_name() -> String:
+	if not current_pet:
+		logger.info("Tried to get pet name when no pet was assigned.")
+		return "Dummy"
+	return current_pet.pet_stats.nickname if current_pet.pet_stats.nickname else current_pet.pet_stats.name
+
+func get_pet_state() -> int:
+	if not current_pet:
+		logger.info("Tried to get pet state when no pet was assigned.")
+		return 0
+	return current_pet.pet_stats.state
+
+func get_pet_state_as_string() -> String:
+	if not current_pet:
+		logger.info("Tried to get pet state as string when no pet was assigned.")
+		return "Egg"
+	return GlobalEnums.PET_STATE.find_key(current_pet.pet_stats.state)
 
 ## Loads and returns the pet data associated with that data file.
 func load_pet(pet_namespace: String) -> Dictionary:
