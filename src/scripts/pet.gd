@@ -3,6 +3,9 @@ class_name Pet
 
 const interpolation: bool = true
 
+@export var movement_speed: int = 100
+@export var jump_height: int = 500
+
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var hitbox: CollisionShape2D = $Hitbox
 
@@ -22,16 +25,39 @@ var pet_stats: Dictionary = {
 		# "evolution_happiness": 0,                     # How inclined the pet is to evolve (if it can).
 		# "flavor_preference": 0,                       # The pet's flavor preference.
 }
-
 var pet_data: Dictionary
+var movement_cooldown: Timer
 var collision_shape: CircleShape2D
+var goal_destination: Vector2
 
 var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _is_moving() -> bool:
 	return velocity.y != 0.0 or velocity.x != 0.0
 
+func _is_close_to_destination() -> bool:
+	var x_range: Array[int] = range(goal_destination.x - 1, goal_destination.x + 2)
+	var y_range: Array[int] = range(goal_destination.y - 1, goal_destination.y + 2)
+
+	return (int(velocity.x) in x_range) and (int(velocity.y) in y_range)
+
+func _move_towards_destination() -> void:
+	if _is_close_to_destination(): return
+	if goal_destination.x < global_position.x:
+		velocity.x -= movement_speed
+	else:
+		velocity.x += movement_speed
+	
+
 func _ready() -> void:
+
+	movement_cooldown = Timer.new()
+	movement_cooldown.autostart = false
+	movement_cooldown.wait_time = 30
+	movement_cooldown.one_shot = true
+	add_child(movement_cooldown)
+	movement_cooldown.start()
+	
 	# Connect the tick function
 	Clock.Tick.connect(_tick_event)
 	# First, get the current pet data and save it in memory.
@@ -72,6 +98,9 @@ func _create_data() -> void:
 	pet_stats.flavor_preference = pet_data.preferences.flavor_preference
 
 func _physics_process(delta: float) -> void:
+	# Handle destination goals
+	if goal_destination and !_is_close_to_destination():
+		_move_towards_destination()
 	# Handle gravity
 	if not is_on_floor():
 		velocity.y += delta * GRAVITY
@@ -79,6 +108,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y = 0
 
 	# Handle sideways movement.
+	if is_on_floor():
+		velocity.x /= 1.25
+	if velocity.x < 1:
+		velocity.x = 0
 
 
 func _animate() -> void:
@@ -111,10 +144,20 @@ func _animate() -> void:
 func jump() -> void:
 	if pet_stats.state == GlobalEnums.PET_STATE.EGG:
 		return
-	velocity.y -= 500
+	velocity.y -= jump_height
 	velocity.x += randf_range(-2.50, 2.50)
 
+func move_randomly() -> void:
+	movement_cooldown.start()
+	if randi_range(1,2) == 1:
+		goal_destination = global_position
+		goal_destination.x += randi_range(-100, 100)
+	else:
+		jump()
+
 func _tick_event(_current_time: float) -> void:
+	if randi_range(1,2) == 1 and movement_cooldown.is_stopped():
+		move_randomly()
 	_animate()
 	# If interpolation is on, we tween.
 	if interpolation:
