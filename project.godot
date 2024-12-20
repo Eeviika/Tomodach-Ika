@@ -56,10 +56,6 @@ gdscript/warnings/confusable_capture_reassignment=2
 window/size/viewport_width=896
 window/stretch/mode="viewport"
 
-[editor]
-
-run/main_run_args="--tests_enabled"
-
 [gui]
 
 theme/custom="res://assets/default_theme.tres"
