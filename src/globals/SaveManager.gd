@@ -66,7 +66,7 @@ func load_data(force: bool = false) -> void:
 	BeforeLoadedData.emit()
 	if not FileAccess.file_exists("user://d_slot%s.sav" % save_slot):
 		logger.info("Generating save data in memory since a save file in slot %s doesn't exist." % save_slot)
-		current_save = EmptySave
+		current_save = EmptySave.duplicate(true)
 		LoadedData.emit(current_save)
 		return
 	var SaveFile: FileAccess = FileAccess.open("user://d_slot%s.sav" % save_slot, FileAccess.READ)
