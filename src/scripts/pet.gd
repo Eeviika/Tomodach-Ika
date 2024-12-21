@@ -3,7 +3,7 @@ class_name Pet
 
 const interpolation: bool = true
 
-@export var movement_speed: int = 100
+@export var movement_speed: int = 30
 @export var jump_height: int = 500
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -30,19 +30,25 @@ var movement_cooldown: Timer
 var collision_shape: CircleShape2D
 var goal_destination: Vector2
 
+var logger: Logger = Logger.new(self)
+
+var reached_destination: bool = true
+
 var GRAVITY: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _is_moving() -> bool:
 	return velocity.y != 0.0 or velocity.x != 0.0
 
 func _is_close_to_destination() -> bool:
-	var x_range: Array[int] = range(goal_destination.x - 1, goal_destination.x + 2)
-	var y_range: Array[int] = range(goal_destination.y - 1, goal_destination.y + 2)
+	var x_range: Array = range(goal_destination.x - 10, goal_destination.x + 11)
+	var y_range: Array = range(goal_destination.y - 10, goal_destination.y + 11)
 
-	return (int(velocity.x) in x_range) and (int(velocity.y) in y_range)
+	return (int(global_position.x) in x_range) and (int(global_position.y) in y_range)
 
 func _move_towards_destination() -> void:
-	if _is_close_to_destination(): return
+	if reached_destination: return;
+	if _is_close_to_destination(): reached_destination = true; return;
+	draw_line(global_position, goal_destination, Color.RED)
 	if goal_destination.x < global_position.x:
 		velocity.x -= movement_speed
 	else:
@@ -53,7 +59,7 @@ func _ready() -> void:
 
 	movement_cooldown = Timer.new()
 	movement_cooldown.autostart = false
-	movement_cooldown.wait_time = 30
+	movement_cooldown.wait_time = 2
 	movement_cooldown.one_shot = true
 	add_child(movement_cooldown)
 	movement_cooldown.start()
@@ -109,8 +115,8 @@ func _physics_process(delta: float) -> void:
 
 	# Handle sideways movement.
 	if is_on_floor():
-		velocity.x /= 1.25
-	if velocity.x < 1:
+		velocity.x /= 1.1
+	if velocity.x > -1 and velocity.x < 1:
 		velocity.x = 0
 
 
@@ -142,21 +148,23 @@ func _animate() -> void:
 		return
 
 func jump() -> void:
-	if pet_stats.state == GlobalEnums.PET_STATE.EGG:
-		return
+	reached_destination = true
 	velocity.y -= jump_height
-	velocity.x += randf_range(-2.50, 2.50)
+	velocity.x += [-movement_speed*5, movement_speed*5].pick_random()
 
 func move_randomly() -> void:
 	movement_cooldown.start()
 	if randi_range(1,2) == 1:
 		goal_destination = global_position
-		goal_destination.x += randi_range(-100, 100)
+		goal_destination.x += randi_range(-200, 200)
+		logger.info("Goal Location: (%f, %f)" % [int(goal_destination.x), int(goal_destination.y)])
+		logger.info("My Location: (%f, %f)" % [int(global_position.x), int(global_position.y)])
+		reached_destination = false;
 	else:
 		jump()
 
 func _tick_event(_current_time: float) -> void:
-	if randi_range(1,2) == 1 and movement_cooldown.is_stopped():
+	if movement_cooldown.is_stopped():
 		move_randomly()
 	_animate()
 	# If interpolation is on, we tween.
