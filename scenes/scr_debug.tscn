@@ -1,11 +1,22 @@
-[gd_scene load_steps=8 format=3 uid="uid://1uvfqrayv3f3"]
+[gd_scene load_steps=13 format=3 uid="uid://1uvfqrayv3f3"]
 
 [ext_resource type="Script" path="res://src/scripts/debug_screen.gd" id="1_52mua"]
 [ext_resource type="AudioStream" uid="uid://hqe40er1jrsx" path="res://audio/mus_waitingRoom.wav" id="2_chccd"]
+[ext_resource type="PackedScene" uid="uid://lqhfwjexko5o" path="res://scenes/scr_game.tscn" id="2_ymutq"]
+[ext_resource type="PackedScene" uid="uid://bw8rdj4ljacvw" path="res://scenes/scr_title.tscn" id="3_bt72e"]
 [ext_resource type="Texture2D" uid="uid://bd04bi4y0gxpl" path="res://assets/dot.png" id="3_oklxv"]
+[ext_resource type="PackedScene" uid="uid://mf2crs6s88xv" path="res://scenes/obj_pet.tscn" id="4_5uoqg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_73ju7"]
-bg_color = Color(0.110617, 0.0626859, 0.198912, 1)
+[sub_resource type="Gradient" id="Gradient_k6fax"]
+offsets = PackedFloat32Array(0, 0.934426)
+colors = PackedColorArray(0.588273, 0.00044107, 0.633553, 1, 0.278815, 0.00397882, 0.407446, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u20rn"]
+gradient = SubResource("Gradient_k6fax")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qaxo8"]
+texture = SubResource("GradientTexture2D_u20rn")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uhwrv"]
 bg_color = Color(0, 0, 0, 0.541176)
@@ -35,6 +46,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_52mua")
+scenes = Array[PackedScene]([ExtResource("3_bt72e"), ExtResource("2_ymutq"), ExtResource("4_5uoqg")])
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 z_index = 1
@@ -44,7 +56,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_73ju7")
+theme_override_styles/panel = SubResource("StyleBoxTexture_qaxo8")
 
 [node name="TitleAndContentContainer" type="VBoxContainer" parent="PanelContainer"]
 z_index = 1
@@ -100,6 +112,7 @@ text = "Scene Buttons (these send you to a new screen)"
 horizontal_alignment = 1
 
 [node name="SceneButtons" type="HFlowContainer" parent="PanelContainer/TitleAndContentContainer/Content/ContentPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/h_separation = 10
 theme_override_constants/v_separation = 5
@@ -116,11 +129,20 @@ text = "Callable Buttons (these make something happen)"
 horizontal_alignment = 1
 
 [node name="CallableButtons" type="HFlowContainer" parent="PanelContainer/TitleAndContentContainer/Content/ContentPanel/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 5
+alignment = 1
+
+[node name="ExampleButton" type="Button" parent="PanelContainer/TitleAndContentContainer/Content/ContentPanel/MarginContainer/VBoxContainer/CallableButtons"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "ExampleButton"
 
 [node name="Parallax2D" type="Parallax2D" parent="PanelContainer"]
 repeat_size = Vector2(45, 45)
-autoscroll = Vector2(35, 35)
+autoscroll = Vector2(75, 75)
 repeat_times = 50
 ignore_camera_scroll = true
 
